@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Wendy Dharmawan",
+    "email": "works@test.com",
+    "password": "PwWorks123!",
+    "phone": "08123456789",
+    "expected_output": "201"
+  },
+  {
+    "name": "John",
+    "email": "john@test.com",
+    "password": "password123",
+    "phone": "08987654321",
+    "expected_output": "422"
+  }
+]
