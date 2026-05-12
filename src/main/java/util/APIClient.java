@@ -18,8 +18,11 @@ import java.util.stream.Collectors;
 
 public class APIClient {
 
-    private static final HttpClient client =
-            HttpClient.newHttpClient();
+    private final java.net.http.HttpClient client =
+            java.net.http.HttpClient.newHttpClient();
+
+    private final HttpExecutor executor =
+            new HttpExecutor(client);
 
     private final String baseUrl;
 
@@ -38,29 +41,25 @@ public class APIClient {
 
             String boundary = "----JavaBoundary" + System.currentTimeMillis();
 
-            HttpRequest.BodyPublisher bodyPublisher =
+            HttpRequest.BodyPublisher body =
                     buildMultipartBody(form, boundary);
 
-            HttpRequest.Builder requestBuilder =
+            HttpRequest.Builder builder =
                     HttpRequest.newBuilder()
                             .uri(URI.create(baseUrl + endpoint))
                             .header("Content-Type", "multipart/form-data; boundary=" + boundary)
                             .header("Accept", "application/json");
 
             if (bearerToken != null) {
-                requestBuilder.header("Authorization", "Bearer " + bearerToken);
+                builder.header("Authorization", "Bearer " + bearerToken);
             }
 
-            requestBuilder.method(
-                    method.toUpperCase(),
-                    bodyPublisher
-            );
+            builder.method(method.toUpperCase(), body);
+
+            HttpRequest request = builder.build();
 
             HttpResponse<String> response =
-                    client.send(
-                            requestBuilder.build(),
-                            HttpResponse.BodyHandlers.ofString()
-                    );
+                    executor.executeWithRetry(request, 3);
 
             return new APIResponse(
                     response.statusCode(),
@@ -87,57 +86,37 @@ public class APIClient {
 
             String formData = buildFormData(form);
 
-            HttpRequest.Builder requestBuilder =
+            HttpRequest.Builder builder =
                     HttpRequest.newBuilder()
                             .uri(URI.create(baseUrl + endpoint))
-                            .header(
-                                    "Content-Type",
-                                    "application/x-www-form-urlencoded"
-                            );
+                            .header("Content-Type", "application/x-www-form-urlencoded");
 
             if (bearerToken != null) {
-
-                requestBuilder.header(
-                        "Authorization",
-                        "Bearer " + bearerToken
-                );
+                builder.header("Authorization", "Bearer " + bearerToken);
             }
 
             switch (method.toUpperCase()) {
-
                 case "POST":
-
-                    requestBuilder.POST(
-                            HttpRequest.BodyPublishers.ofString(formData)
-                    );
-
+                    builder.POST(HttpRequest.BodyPublishers.ofString(formData));
                     break;
-
                 case "PUT":
-
-                    requestBuilder.PUT(
-                            HttpRequest.BodyPublishers.ofString(formData)
-                    );
-
+                    builder.PUT(HttpRequest.BodyPublishers.ofString(formData));
                     break;
-
                 default:
-
-                    requestBuilder.GET();
+                    builder.GET();
             }
 
+            HttpRequest request = builder.build();
+
             HttpResponse<String> response =
-                    client.send(
-                            requestBuilder.build(),
-                            HttpResponse.BodyHandlers.ofString()
-                    );
+                    executor.executeWithRetry(request, 3);
 
             return new APIResponse(
                     response.statusCode(),
                     response.body()
             );
 
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
 
             throw new RuntimeException(e);
         }
