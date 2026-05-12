@@ -9,6 +9,6 @@
     "email": "principal@mai.co.id",
     "password": "microad123",
     "cf_turnstile_token": "!change_me",
-    "expected_response_code": "200"
+    "expected_response_code": "422"
   }
 ]

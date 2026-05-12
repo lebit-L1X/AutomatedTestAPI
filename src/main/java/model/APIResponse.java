@@ -2,11 +2,11 @@ package model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ApiResponse {
+public class APIResponse {
     private int statusCode;
     private String body;
 
-    public ApiResponse(int statusCode, String body) {
+    public APIResponse(int statusCode, String body) {
         this.statusCode = statusCode;
         this.body = body;
     }

@@ -1,47 +1,40 @@
 package Test;
 
 import io.qameta.allure.*;
-import model.ApiResponse;
-import util.JSONDataProvider;
+import model.APIResponse;
 import model.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import endpoints.Register;
 
 import java.util.Map;
 
+import static util.JSONDataProvider.getExpectedResponseCode;
+
 @Epic("Auth Module")
 @Feature("User Registration")
-public class AccountRegisterTest extends TestAPIClient{
+public class AccountRegisterTest {
+
+    private final Register register = new Register();
 
     @Test(
             dataProvider = "registerData",
             dataProviderClass = TestDataProvider.class
     )
     @Description("Register user and validate response code")
-    public void testRegister(Map<String, Object> user) throws InterruptedException {
+    public void testRegister(Map<String, Object> user) {
 
-        Map<String, String> form = JSONDataProvider.formBuild(
-                user,
-                "name",
-                "email",
-                "password",
-                "phone"
-        );
-        int expectedOutput =  JSONDataProvider.getExpectedResponseCode(user);
-        Thread.sleep(15000);
-        ApiResponse res  = api.sendRequest(
-                "POST",
-                "/auth/register",
-                form,
-                null
-        );
-        int responseCode = res.getStatusCode();
+        APIResponse res = register.register(user);
+
+        int actualResponseCode = res.getStatusCode();
+        int expectedResponseCode = getExpectedResponseCode(user);
 
         Assert.assertEquals(
-                responseCode,
-                expectedOutput,
+                actualResponseCode,
+                expectedResponseCode,
                 "Unexpected status code for: " + user.get("name")
         );
+
         System.out.println(res.getBody());
     }
 }

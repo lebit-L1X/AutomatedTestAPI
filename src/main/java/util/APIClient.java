@@ -1,6 +1,6 @@
-package client;
+package util;
 
-import model.ApiResponse;
+import model.APIResponse;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,7 +23,7 @@ public class APIClient {
         this.baseUrl = baseUrl;
     }
 
-    public ApiResponse sendRequest(
+    public APIResponse sendRequest(
             String method,
             String endpoint,
             Map<String, String> form,
@@ -79,7 +79,7 @@ public class APIClient {
                             HttpResponse.BodyHandlers.ofString()
                     );
 
-            return new ApiResponse(
+            return new APIResponse(
                     response.statusCode(),
                     response.body()
             );
@@ -90,11 +90,11 @@ public class APIClient {
         }
     }
 
-    public ApiResponse sendMultipartRequest(){
-        return new ApiResponse(1,"lol");
+    public APIResponse sendMultipartRequest(){
+        return new APIResponse(1,"lol");
     }
 
-    private String buildFormData(
+    protected String buildFormData(
             Map<String, String> form
     ) {
 

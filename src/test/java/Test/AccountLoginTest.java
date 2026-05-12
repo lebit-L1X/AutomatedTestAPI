@@ -1,47 +1,37 @@
 package Test;
 
-import model.ApiResponse;
+import model.APIResponse;
 import model.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import util.JSONDataProvider;
+import endpoints.Login;
 
 import java.util.Map;
 
-public class AccountLoginTest extends TestAPIClient{
+import static util.JSONDataProvider.getExpectedResponseCode;
 
-    private String sessionToken;
+public class AccountLoginTest {
+
+    private static String sessionToken = null;
+
+    private final Login login = new Login();
 
     @Test(
             dataProvider = "loginData",
             dataProviderClass = TestDataProvider.class
     )
-    public void testLogin(Map<String, Object> user){
-        Map<String, String> form = JSONDataProvider.formBuild(
-                user,
-                "email",
-                "password",
-                "cf_turnstile_token"
-        );
-        int expectedOutput =  JSONDataProvider.getExpectedResponseCode(user);
+    public void testLogin(Map<String, Object> user) {
 
-        ApiResponse res = api.sendRequest(
-                "POST",
-                "/auth/login",
-                form,
-                null
-        );
-        int responseCode = res.getStatusCode();
+        APIResponse res = login.login(user);
+
+        int actualResponseCode = res.getStatusCode();
+        int expectedResponseCode = getExpectedResponseCode(user);
 
         Assert.assertEquals(
-                responseCode,
-                expectedOutput,
+                actualResponseCode,
+                expectedResponseCode,
                 "Unexpected status code for: " + user.get("email")
         );
+      }
 
-        if (responseCode == 200){
-            AccountLoginTest.setToken(res.getJsonValue("token").toString());
-            System.out.println(AccountLoginTest.getToken());
-        }
-    }
 }
