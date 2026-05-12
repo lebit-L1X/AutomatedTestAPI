@@ -32,9 +32,7 @@ public class AccountRegisterTest {
         Assert.assertEquals(
                 actualResponseCode,
                 expectedResponseCode,
-                "Unexpected status code for: " + user.get("name")
+                "Unexpected status code for: " + user.get("name") + "\nbody: " + res.getBody()
         );
-
-        System.out.println(res.getBody());
     }
 }

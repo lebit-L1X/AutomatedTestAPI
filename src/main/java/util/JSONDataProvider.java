@@ -37,6 +37,53 @@ public class JSONDataProvider {
         }
     }
 
+    public static Map<String, Object> multipartBuild(
+            Map<String, Object> source,
+            String... fields
+    ) {
+
+        Map<String, Object> result = new HashMap<>();
+
+        for (String field : fields) {
+
+            Object value = source.get(field);
+
+            if (value == null) {
+                continue;
+            }
+
+            if (value instanceof String) {
+
+                String str = ((String) value).trim();
+
+                if (str.isEmpty()) {
+                    continue;
+                }
+
+                if (isFilePath(str)) {
+
+                    File file = new File(str);
+
+                    if (file.exists() && file.isFile()) {
+                        result.put(field, file);
+                    } else {
+                        throw new RuntimeException(
+                                "File not found: " + str + " for field: " + field
+                        );
+                    }
+
+                } else {
+                    result.put(field, str);
+                }
+
+            } else {
+                result.put(field, value);
+            }
+        }
+
+        return result;
+    }
+
     public static Map<String, String> formBuild(
             Map<String, Object> source,
             String... fields
@@ -87,4 +134,21 @@ public class JSONDataProvider {
 
         return value.toString();
     }
+    private static boolean isFilePath(String value) {
+
+        if (value == null) return false;
+
+        String v = value.trim();
+
+        return v.startsWith("src/")
+                || v.startsWith("file:")
+                || v.contains(".jpg")
+                || v.contains(".jpeg")
+                || v.contains(".png")
+                || v.contains(".webp")
+                || v.contains(".heic")
+                || v.contains(".pdf");
+    }
+
 }
+

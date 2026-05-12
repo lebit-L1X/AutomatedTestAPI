@@ -5,7 +5,7 @@ import model.APIResponse;
 import java.util.Map;
 
 
-public class Login extends BaseTestClient {
+public class Login extends BaseTestMethods {
 
     private static final String ENDPOINT = "/auth/login";
 
@@ -14,20 +14,29 @@ public class Login extends BaseTestClient {
         return post(
                 ENDPOINT,
                 user,
+                null,
                 "email",
                 "password",
                 "cf_turnstile_token"
         );
     }
 
-    public String loginAndGetToken(Map<String, Object> user) {
+    public void loginAndSetToken(Map<String, Object> user) {
 
-        return post(
+        APIResponse res = post(
                 ENDPOINT,
                 user,
+                null,
                 "email",
                 "password",
                 "cf_turnstile_token"
-        ).getJsonValue("token").toString();
+        );
+
+        if (res.getStatusCode() != 200) {
+            return;
+        }
+
+        String token =  res.getJsonValue("token").toString();
+        setToken(token);
     }
 }

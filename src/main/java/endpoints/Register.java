@@ -4,7 +4,7 @@ import model.APIResponse;
 
 import java.util.Map;
 
-public class Register extends BaseTestClient {
+public class Register extends BaseTestMethods {
 
     private static final String ENDPOINT = "/auth/register";
 

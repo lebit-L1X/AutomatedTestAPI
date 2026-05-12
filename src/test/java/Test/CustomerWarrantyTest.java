@@ -1,5 +1,6 @@
 package Test;
 
+import endpoints.Warranty;
 import model.APIResponse;
 import model.TestDataProvider;
 import org.testng.Assert;
@@ -10,24 +11,24 @@ import java.util.Map;
 
 import static util.JSONDataProvider.getExpectedResponseCode;
 
-public class AccountLoginTest {
+public class CustomerWarrantyTest{
 
     private final Login login = new Login();
-
+    private final Warranty warranty = new Warranty();
     @Test(
-            dataProvider = "loginData",
+            dataProvider = "warrantyCreateData",
             dataProviderClass = TestDataProvider.class
     )
-    public void testLogin(Map<String, Object> user) {
+    public void testCreate(Map<String, Object> customer) {
 
-        APIResponse res = login.login(user);
-
+        login.loginAndSetToken(customer);
+        APIResponse res = warranty.createWarranty(customer);
         int actualResponseCode = res.getStatusCode();
-        int expectedResponseCode = getExpectedResponseCode(user);
+        int expectedResponseCode = getExpectedResponseCode(customer);
         Assert.assertEquals(
                 actualResponseCode,
                 expectedResponseCode,
-                "Error" + res.getStatusCode() +" for: " + user.get("email") +
+                "Error" + res.getStatusCode() +" for: " + customer.get("email") +
                         "\nbody: " + res.getBody()
         );
         if (actualResponseCode == expectedResponseCode) {
@@ -35,7 +36,6 @@ public class AccountLoginTest {
             System.out.println(res.getBody());
         }
 
-
-      }
+    }
 
 }

@@ -1,4 +1,5 @@
 package model;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,7 +16,7 @@ public class APIResponse {
         return statusCode;
     }
 
-    public Object getJsonValue(String key){
+    public Object getJsonValue(String key) {
         return getBody().get(key);
     }
 
@@ -23,19 +24,15 @@ public class APIResponse {
 
         try {
 
-            ObjectMapper mapper =
-                    new ObjectMapper();
+            ObjectMapper mapper = new ObjectMapper();
 
             return mapper.readTree(body);
 
         } catch (Exception e) {
 
-            throw new RuntimeException(
-                    "Failed to parse response body as JSON",
-                    e
-            );
+            return null;
         }
     }
-
-
 }
+
+

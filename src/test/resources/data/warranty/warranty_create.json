@@ -1,0 +1,29 @@
+[
+  {
+    "email": "isubscribed99@gmail.com",
+    "password": "Password123!",
+    "cf_turnstile_token": "0.Ktx5mANqMl12jbNabBKYnKtWpMhCr-SCyWMDeXwITXbAYRmXg0Kh5nXAleEjnPgiT9817Ot7SyuUbrh94OzEYzNk692E0eO5G1DJ4RWByYsYpe8bV3oaq219kxob7ipRxwyM23weS9MXvdaf1JBLpmQsnM6CQl4jdNbmXjBBjaR37tBACJuqwqJG6uwy2sANnIizIo2-IS-TBChyF9Hm4OcXm9Yjpw42WGayRH7TrQ1HIuyxYaHzcHkxhs2t0fgTY1aIVlpC3E6ozuCTI-LfVFwr3JQ-YUZ-82SjSzuBd0EREHFEN8g-Cba6sSabq_dcnhFIxol7E_X6EDgaWJrg7EZrvQoqb9pfyPm3Iwldl2fHYKkgso5jv262-RFenqTl2yf4AL4tEyYRhALxQItdaVCrnXglfJki4drSgOpaJTAh3BbbuwTaMf6vQseDZIFZM-D2pGcLOmGKJguNBVPpHFbZaE4QY4iob2YfJM7p2w4bA6an9ZqnnwMSRb5v8HBaevpB61Mspe_eMrzGj4NYERzInl0DS22JXfh1RfEKAKcSgTQujbLB5yhxs9OvoUkSigZRmA0bEyHxRyU5sQ44WauxWXS4TV_TO9saXmm9MSIgTfokpUDKx4nxr-zd5gkAkob7mo9tj50ieGoDLqGT5hZtGla3MdK7ouErmgkc5rjly6tWZ0wHeeuVefr13hStRb7fN2uFrqP-d4HEe20Gj1aMk8W0TO46Fd7jbJS15F1kpca6Hn0rmB3VhVnUjD2nTs-R7eYLdaIf6Mt02k7hKPssWJtIiWNbKJoK0BeJDtKieQ0ymjDAQfMgc84ND58w6dsvGyHu5Mhxf1D8wnUQDJigD53c3vCk88F5iNCCnPcDAVh2W1aX1WURAY1-AD99RK5BoR8LmKq6AFkkniCXV1ii_VBQ8gY-ZvPUFIjIfZyOmL1VFehGLQxdu5HRq7dr.sap6PLAa2EGCexFZET2BIw.6659f6188e060a83e62814e1f6c19f966b12f751b6f4ab00653c3a952121ebe0",
+    "brand": "toyota",
+    "model": "avanza",
+    "plate_number": "B94858TG",
+    "odometer": "39994",
+    "store_id": "1",
+    "purchase_date":"2026-01-01",
+    "invoice_number": "98834884",
+    "tires[0][tire_type]": "tes",
+    "tires[0][tire_size]":"35",
+    "tires[0][barcode]": "19999",
+    "tires[0][barcode_image]": "src/test/resources/data/sample.jpg",
+    "tires[0][tire_number]": "35",
+    "tires[0][tire_number_image]": "src/test/resources/data/sample.jpg",
+    "tires[1][tire_type]": "tes",
+    "tires[1][tire_size]": "35",
+    "tires[1][barcode]": "1666",
+    "tires[1][barcode_image]": "src/test/resources/data/sample.jpg",
+    "tires[1][tire_number]": "55",
+    "tires[1][tire_number_image]": "src/test/resources/data/sample.jpg",
+    "invoice": "src/test/resources/data/sample.jpg",
+    "image_odometer": "src/test/resources/data/sample.jpg",
+    "expected_response_code": "200"
+  }
+]
