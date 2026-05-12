@@ -1,0 +1,14 @@
+[
+  {
+    "email": "isubscribed99@gmail.com",
+    "password": "Password123!",
+    "cf_turnstile_token": "!change_me",
+    "expected_response_code": "200"
+  },
+  {
+    "email": "principal@mai.co.id",
+    "password": "microad123",
+    "cf_turnstile_token": "!change_me",
+    "expected_response_code": "200"
+  }
+]

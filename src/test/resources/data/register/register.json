@@ -1,0 +1,146 @@
+[
+  {
+    "_comment": "Tanpa Nama",
+    "name": "",
+    "email": "works@test.com",
+    "password": "PwWorks123!",
+    "phone": "08123456789",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Tanpa email",
+    "name": "John",
+    "email": "",
+    "password": "Password123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Tanpa Telpon",
+    "name": "Saul Goodman",
+    "email": "saul1@gmail.com",
+    "password": "Password123!",
+    "phone": "",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Tanpa sandi",
+    "name": "Saul Goodman",
+    "email": "saul2@gmail.com",
+    "password": "",
+    "phone": "0812345678",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "KecilSemua",
+    "email": "saul3@gmail.com",
+    "password": "password123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "Tanpa Angka",
+    "email": "saul3@gmail.com",
+    "password": "Passwordddd!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "Besar Semua",
+    "email": "saul3@gmail.com",
+    "password": "PASSWORD123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "Kecil Angka",
+    "email": "saul3@gmail.com",
+    "password": "password123",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Testcase",
+    "name": "Lengkap",
+    "email": "saul55@gmail.com",
+    "password": "Password123!",
+    "phone": "08987654321",
+    "expected_response_code": "201"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "Tanpa simbol",
+    "email": "saul3@gmail.com",
+    "password": "Password123",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "Lengkap tanpa lower",
+    "email": "saul3@gmail.com",
+    "password": "PASSWORD123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "lengkap tanpa gede",
+    "email": "saul3@gmail.com",
+    "password": "password123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Sandi Invalid",
+    "name": "angka doang",
+    "email": "saul3@gmail.com",
+    "password": "123456789",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Duplikat1",
+    "name": "IniBerhasil",
+    "email": "original@gmail.com",
+    "password": "Works123!",
+    "phone": "08987654321",
+    "expected_response_code": "201"
+  },
+  {
+    "_comment": "Duplikat2",
+    "name": "IniGagal",
+    "email": "original@gmail.com",
+    "password": "Works123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Invalid Email",
+    "name": "Email invalid",
+    "email": "tuan@gmail",
+    "password": "Works123!",
+    "phone": "08987654321",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Telpon Huruf",
+    "name": "Telpon Huruf",
+    "email": "tuan@gmail",
+    "password": "Works123!",
+    "phone": "08987654321A",
+    "expected_response_code": "422"
+  },
+  {
+    "_comment": "Injection",
+    "name": "Drop table users;",
+    "email": "tuanku@gmail.com",
+    "password": "Works123!",
+    "phone": "08987654321",
+    "expected_response_code": "201"
+  }
+]

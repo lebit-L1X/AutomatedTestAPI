@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite
+        name="API Test Suite"
+        parallel="false"
+>
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+
+    <test name="Authentication Tests">
+
+        <classes>
+
+            <class name="Test.AccountRegisterTest" />
+
+        </classes>
+
+    </test>
+
+</suite>

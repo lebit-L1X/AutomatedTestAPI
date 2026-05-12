@@ -1,37 +1,33 @@
 package Test;
 
-import io.qameta.allure.*;
 import model.ApiResponse;
-import util.JSONDataProvider;
 import model.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import util.JSONDataProvider;
 
 import java.util.Map;
 
-@Epic("Auth Module")
-@Feature("User Registration")
-public class AccountRegisterTest extends TestAPIClient{
+public class AccountLoginTest extends TestAPIClient{
+
+    private String sessionToken;
 
     @Test(
-            dataProvider = "registerData",
+            dataProvider = "loginData",
             dataProviderClass = TestDataProvider.class
     )
-    @Description("Register user and validate response code")
-    public void testRegister(Map<String, Object> user) throws InterruptedException {
-
+    public void testLogin(Map<String, Object> user){
         Map<String, String> form = JSONDataProvider.formBuild(
                 user,
-                "name",
                 "email",
                 "password",
-                "phone"
+                "cf_turnstile_token"
         );
         int expectedOutput =  JSONDataProvider.getExpectedResponseCode(user);
-        Thread.sleep(15000);
-        ApiResponse res  = api.sendRequest(
+
+        ApiResponse res = api.sendRequest(
                 "POST",
-                "/auth/register",
+                "/auth/login",
                 form,
                 null
         );
@@ -40,8 +36,12 @@ public class AccountRegisterTest extends TestAPIClient{
         Assert.assertEquals(
                 responseCode,
                 expectedOutput,
-                "Unexpected status code for: " + user.get("name")
+                "Unexpected status code for: " + user.get("email")
         );
-        System.out.println(res.getBody());
+
+        if (responseCode == 200){
+            AccountLoginTest.setToken(res.getJsonValue("token").toString());
+            System.out.println(AccountLoginTest.getToken());
+        }
     }
 }
